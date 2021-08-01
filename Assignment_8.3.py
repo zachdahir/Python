@@ -2,13 +2,11 @@
 #Assignment 8.3
 #7-28-21
 
-
 import requests, json
 
 def main():
     apiKey = '25a8bf00b11974c7afaa326f12cea38c'
-
-    dataType = input('Select search method: \n [1] Zipcode \n [2] City')
+    dataType = input('Select search method: \n [1] Zipcode \n [2] City \n')
 
     def veiwLocation():
         if dataType == str(1):
@@ -24,20 +22,22 @@ def main():
                 print('Invalid zipcode')
                 veiwLocation()
 
-        elif dataType == 2:
+        elif dataType == str(2):
             city = input('Please enter city name:\n')
-
-            url = 'api.openweathermap.org/data/2.5/weather?q=' + city +  '&appid=' + apiKey
+            url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city +  '&appid=' + apiKey
+            response = requests.get(url)
+            x = response.json()
+            print(x)
 
         else:
             print('Invalid input')
             veiwLocation()
-
+            
     veiwLocation()
 
-    restart = input('Would you like to veiw another location? Yes or No? \n')
+    runAgain = input('Would you like to veiw another location? Yes or No? \n')
 
-    if restart == 'Yes' or 'yes':
+    if runAgain == 'Yes' or runAgain == 'yes':
         main()
 
     else:
