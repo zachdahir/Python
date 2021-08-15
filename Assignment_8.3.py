@@ -17,12 +17,18 @@ def main():
 
             if len(str(zip)) == 5:
                 #call api
-                url = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zip + '&appid=' + apiKey
+                url = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zip + '&appid=' + apiKey + '&units=imperial'
 
                 #store response in var and print data
                 response = requests.get(url)
                 weatherData = response.json()
-                print(weatherData)
+                weatherMain = weatherData["main"]
+                temp = weatherMain['temp']
+                feelsLike = weatherMain['feels_like']
+                humidity = weatherMain['humidity']
+                print('Temperature: ' + str(temp))
+                print('Feels like: ' + str(feelsLike))
+                print('Humidity: ' + str(humidity) + '%')
         
             else:
                 print('Invalid zipcode')
@@ -33,12 +39,18 @@ def main():
             city = input('Please enter city name:\n')
 
             #call api
-            url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city +  '&appid=' + apiKey
+            url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city +  '&appid=' + apiKey + '&units=imperial'
 
             #store response in var and print data
             response = requests.get(url)
             weatherData = response.json()
-            print(weatherData)
+            weatherMain = weatherData["main"]
+            temp = weatherMain['temp']
+            feelsLike = weatherMain['feels_like']
+            humidity = weatherMain['humidity']
+            print('Temperature: ' + str(temp))
+            print('Feels like: ' + str(feelsLike))
+            print('Humidity: ' + str(humidity) + '%')
 
         else:
             print('Invalid input')
